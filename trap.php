@@ -19,7 +19,5 @@ $ip = $request->getClientIp();
 $log->pushHandler(new StreamHandler(__DIR__ . '/traffic.log', Logger::DEBUG));
 $log->pushHandler(new FirePHPHandler());
 
-$black_list_check = $db->query("SELECT * FROM black_list WHERE ip = '$ip'");
-
 $log->info('pixel-trap-bot-detected', ['bot-user-agent' => $userAgent, 'bot-ip' => $ip]);
 $db->query("INSERT INTO black_list (ip, user_agent) VALUES ('$ip', '$userAgent')");
